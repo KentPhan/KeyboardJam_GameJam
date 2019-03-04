@@ -1,18 +1,25 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+using Pathfinding;
 using UnityEngine;
 
-public class MonsterComponent : MonoBehaviour
+namespace Assets.Source
 {
-    // Start is called before the first frame update
-    void Start()
+    public class MonsterComponent : MonoBehaviour
     {
-        
-    }
+        [SerializeField]
+        private PlayerComponent m_Target;
+        private AIPath m_AIPathComponent;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        // Start is called before the first frame update
+        void Start()
+        {
+            m_AIPathComponent = GetComponent<AIPath>();
+            m_AIPathComponent.destination = m_Target.transform.position;
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
     }
 }
