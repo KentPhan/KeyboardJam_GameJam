@@ -44,6 +44,7 @@ namespace Assets.Source
             {
                 m_CurrentInput = string.Empty;
                 m_BufferReset = false;
+                AIPathFindingManager.Instance.RescanGraph();
             }
         }
 
