@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Assets.Source.Events;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -22,6 +23,8 @@ namespace Assets.Source
 
         // Screens
         [SerializeField] private RectTransform m_StartScreen;
+        [SerializeField] private RectTransform m_PlayScreen;
+        [SerializeField] private TextMeshProUGUI m_SlimeCount;
         [SerializeField] private RectTransform m_GameOverScreen;
 
 
@@ -56,14 +59,21 @@ namespace Assets.Source
             "RATS",
             "TALL",
             "YOLANDA",
-            "I",
             "78",
-            "JOSE",
+            "PANTS",
             "DICKS",
             "CHICKS",
             "Z41",
             "12345",
-            "98765"
+            "98765",
+            "=3",
+            "KENT",
+            "+7",
+            "FIVEZER00000",
+            "APPLE",
+            "JACK",
+            "ESCALATE",
+            "NOOOOOOOOOOOO"
         };
 
 
@@ -89,6 +99,7 @@ namespace Assets.Source
             m_BufferReset = false;
 
             m_StartScreen.gameObject.SetActive(true);
+            m_PlayScreen.gameObject.SetActive(false);
             m_GameOverScreen.gameObject.SetActive(false);
         }
 
@@ -122,6 +133,9 @@ namespace Assets.Source
                         l_NewMonster.SetTarget(m_Player);
                         m_Monsters.Add(l_NewMonster);
                         m_CurrentTimer = m_SpawnTimer;
+
+
+                        m_SlimeCount.text = m_Monsters.Count.ToString();
                     }
 
 
@@ -135,12 +149,8 @@ namespace Assets.Source
             if (Input.GetKeyDown(KeyCode.Escape))
                 Application.Quit();
 
-            if (Input.GetKeyDown(KeyCode.Tilde))
+            if (Input.GetKeyDown(KeyCode.F1))
                 RestartGame();
-
-
-
-            Debug.Log(m_CurrentTimer);
         }
 
         public void LateUpdate()
@@ -184,8 +194,11 @@ namespace Assets.Source
                 m_Monsters.Add(l_component);
             }
 
+            // UI
             m_StartScreen.gameObject.SetActive(false);
+            m_PlayScreen.gameObject.SetActive(true);
             m_CurrentState = GameState.PLAY;
+            m_SlimeCount.text = "0";
 
             // Timer
             m_CurrentTimer = m_StartTimer;
