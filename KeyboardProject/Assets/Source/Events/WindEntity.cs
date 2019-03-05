@@ -13,5 +13,15 @@ namespace Assets.Source.Events
         {
             throw new System.NotImplementedException();
         }
+
+        public override void Activate()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void DeActivate()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

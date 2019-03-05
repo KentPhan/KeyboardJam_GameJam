@@ -5,7 +5,6 @@ namespace Assets.Source
 {
     public class MonsterComponent : MonoBehaviour
     {
-        [SerializeField]
         private PlayerComponent m_Target;
         private AIPath m_AIPathComponent;
 
@@ -13,6 +12,12 @@ namespace Assets.Source
         void Start()
         {
             m_AIPathComponent = GetComponent<AIPath>();
+
+        }
+
+        public void SetTarget(PlayerComponent i_Target)
+        {
+            m_Target = i_Target;
             m_AIPathComponent.destination = m_Target.transform.position;
         }
 

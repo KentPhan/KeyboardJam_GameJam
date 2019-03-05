@@ -21,6 +21,8 @@ namespace Assets.Source
             }
 
             m_PathFinder = GetComponent<AstarPath>();
+
+            //RescanGraph();
         }
 
 
