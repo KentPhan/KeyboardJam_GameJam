@@ -23,14 +23,7 @@ namespace Assets.Source.Events
         void Update()
         {
 
-            if (!String.IsNullOrWhiteSpace(m_Word))
-            {
-                if (WordEventManager.Instance.HasInputedWord(m_Word))
-                {
-                    Toggle();
-                    WordEventManager.Instance.BufferReset();
-                }
-            }
+            
 
         }
 

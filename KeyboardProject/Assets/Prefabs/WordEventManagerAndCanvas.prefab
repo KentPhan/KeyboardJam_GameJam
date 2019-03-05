@@ -435,3 +435,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_StartScreen: {fileID: 2093685156}
   m_GameOverScreen: {fileID: 2041556885}
+  m_MonsterSpawnLocations:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  m_MonsterPrefab: {fileID: 0}
+  m_SpawnTimer: 5

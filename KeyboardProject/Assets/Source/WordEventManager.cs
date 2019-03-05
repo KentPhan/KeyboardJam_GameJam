@@ -19,16 +19,28 @@ namespace Assets.Source
 
     public class WordEventManager : MonoBehaviour
     {
-        //[SerializeField] private ActionEntity[] m_Actions;
-        private string m_CurrentInput;
-        private bool m_BufferReset = false;
 
-
-
+        // Screens
         [SerializeField] private RectTransform m_StartScreen;
         [SerializeField] private RectTransform m_GameOverScreen;
 
 
+        // Input
+        private string m_CurrentInput;
+        private bool m_BufferReset = false;
+
+
+        // Monster Stuff
+        [SerializeField] private GameObject[] m_MonsterSpawnLocations;
+        [SerializeField] private MonsterComponent m_MonsterPrefab;
+        [SerializeField] private float m_SpawnTimer = 10.0f;
+        [SerializeField] private float m_StartTimer = 8.0f;
+        private float m_CurrentTimer = 10.0f;
+
+
+
+
+        // Cache
         private GameState m_CurrentState;
         private List<MonsterComponent> m_Monsters;
         private PlayerComponent m_Player;
@@ -43,6 +55,15 @@ namespace Assets.Source
             "ELEPHANT",
             "RATS",
             "TALL",
+            "YOLANDA",
+            "I",
+            "78",
+            "JOSE",
+            "DICKS",
+            "CHICKS",
+            "Z41",
+            "12345",
+            "98765"
         };
 
 
@@ -90,6 +111,20 @@ namespace Assets.Source
                             BufferReset();
                         }
                     }
+
+
+                    m_CurrentTimer -= Time.deltaTime;
+
+                    if (m_CurrentTimer <= 0.0f)
+                    {
+                        MonsterComponent l_NewMonster = Instantiate(m_MonsterPrefab, m_MonsterSpawnLocations[Random.Range(0, m_MonsterSpawnLocations.Length - 1)].transform.position,
+                            Quaternion.identity, this.transform);
+                        l_NewMonster.SetTarget(m_Player);
+                        m_Monsters.Add(l_NewMonster);
+                        m_CurrentTimer = m_SpawnTimer;
+                    }
+
+
                     break;
                 case GameState.GAMEOVER:
                     break;
@@ -100,9 +135,12 @@ namespace Assets.Source
             if (Input.GetKeyDown(KeyCode.Escape))
                 Application.Quit();
 
-            if (Input.GetKeyDown(KeyCode.Backspace))
+            if (Input.GetKeyDown(KeyCode.Tilde))
                 RestartGame();
 
+
+
+            Debug.Log(m_CurrentTimer);
         }
 
         public void LateUpdate()
@@ -141,12 +179,16 @@ namespace Assets.Source
             foreach (var l_Monster in m_MonsterGameObjects)
             {
                 MonsterComponent l_component = l_Monster.GetComponent<MonsterComponent>();
+                l_component.gameObject.transform.SetParent(this.transform);
                 l_component.SetTarget(m_Player);
                 m_Monsters.Add(l_component);
             }
 
             m_StartScreen.gameObject.SetActive(false);
             m_CurrentState = GameState.PLAY;
+
+            // Timer
+            m_CurrentTimer = m_StartTimer;
         }
 
 

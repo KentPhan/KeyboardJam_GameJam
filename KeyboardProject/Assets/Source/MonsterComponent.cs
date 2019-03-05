@@ -8,10 +8,16 @@ namespace Assets.Source
         private PlayerComponent m_Target;
         private AIPath m_AIPathComponent;
 
+
+        private void Awake()
+        {
+            m_AIPathComponent = GetComponent<AIPath>();
+        }
+
         // Start is called before the first frame update
         void Start()
         {
-            m_AIPathComponent = GetComponent<AIPath>();
+
 
         }
 
