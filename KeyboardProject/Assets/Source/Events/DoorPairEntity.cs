@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Assets.Source.Events
@@ -11,12 +12,28 @@ namespace Assets.Source.Events
         // Start is called before the first frame update
         void Start()
         {
+            m_Word = WordEventManager.Instance.GetRandomWord();
+
             m_Door1.SetWord(m_Word);
             m_Door2.SetWord(m_Word);
 
             m_Door1.Activate();
             m_Door2.DeActivate();
         }
+        void Update()
+        {
+
+            if (!String.IsNullOrWhiteSpace(m_Word))
+            {
+                if (WordEventManager.Instance.HasInputedWord(m_Word))
+                {
+                    Toggle();
+                    WordEventManager.Instance.BufferReset();
+                }
+            }
+
+        }
+
 
         public override void Toggle()
         {

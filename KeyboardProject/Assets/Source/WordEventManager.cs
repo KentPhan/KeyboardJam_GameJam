@@ -32,6 +32,7 @@ namespace Assets.Source
         private GameState m_CurrentState;
         private List<MonsterComponent> m_Monsters;
         private PlayerComponent m_Player;
+        private List<DoorPairEntity> m_DoorPairs;
 
         private string[] m_RandomWords = new string[]
         {
@@ -81,6 +82,14 @@ namespace Assets.Source
                     break;
                 case GameState.PLAY:
                     m_CurrentInput += Input.inputString;
+                    foreach (var l_Pair in m_DoorPairs)
+                    {
+                        if (HasInputedWord(l_Pair.GetWord()))
+                        {
+                            l_Pair.Toggle();
+                            BufferReset();
+                        }
+                    }
                     break;
                 case GameState.GAMEOVER:
                     break;
@@ -115,6 +124,17 @@ namespace Assets.Source
             m_Player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerComponent>();
 
 
+            // Get Door Pairs
+            m_DoorPairs = new List<DoorPairEntity>();
+            GameObject[] l_Doors = GameObject.FindGameObjectsWithTag("DoorPair");
+            foreach (var l_Door in l_Doors)
+            {
+                DoorPairEntity l_component = l_Door.GetComponent<DoorPairEntity>();
+                m_DoorPairs.Add(l_component);
+            }
+
+
+            // Get Monsters
             m_Monsters = new List<MonsterComponent>();
             GameObject[] m_MonsterGameObjects = GameObject.FindGameObjectsWithTag("Monster");
 
