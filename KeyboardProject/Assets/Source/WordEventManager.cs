@@ -23,6 +23,11 @@ namespace Assets.Source
         private bool m_BufferReset = false;
 
 
+
+        [SerializeField] private RectTransform m_StartScreen;
+        [SerializeField] private RectTransform m_GameOverScreen;
+
+
         private GameState m_CurrentState;
         private List<MonsterComponent> m_Monsters;
         private PlayerComponent m_Player;
@@ -48,6 +53,9 @@ namespace Assets.Source
         {
             m_CurrentInput = string.Empty;
             m_BufferReset = false;
+
+            m_StartScreen.gameObject.SetActive(true);
+            m_GameOverScreen.gameObject.SetActive(false);
         }
 
 
@@ -105,7 +113,7 @@ namespace Assets.Source
                 m_Monsters.Add(l_component);
             }
 
-
+            m_StartScreen.gameObject.SetActive(false);
             m_CurrentState = GameState.PLAY;
         }
 
@@ -117,6 +125,7 @@ namespace Assets.Source
 
         public void TriggerGameOver()
         {
+            m_GameOverScreen.gameObject.SetActive(true);
             m_CurrentState = GameState.GAMEOVER;
         }
 

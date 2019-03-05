@@ -15,5 +15,15 @@ namespace Assets.Source
         {
 
         }
+
+
+        public void OnCollisionEnter2D(Collision2D i_collision)
+        {
+            if (i_collision.collider.CompareTag("Monster"))
+            {
+                WordEventManager.Instance.TriggerGameOver();
+                Destroy(gameObject);
+            }
+        }
     }
 }

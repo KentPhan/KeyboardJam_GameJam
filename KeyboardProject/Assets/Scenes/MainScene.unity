@@ -19528,6 +19528,22 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2093685157, guid: e9591bd450b76ad4d8248164fc5234d7, type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2093685157, guid: e9591bd450b76ad4d8248164fc5234d7, type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2041556886, guid: e9591bd450b76ad4d8248164fc5234d7, type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2041556886, guid: e9591bd450b76ad4d8248164fc5234d7, type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9591bd450b76ad4d8248164fc5234d7, type: 3}
 --- !u!1001 &2676291080755747073
