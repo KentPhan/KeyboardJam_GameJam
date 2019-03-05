@@ -21,8 +21,12 @@ namespace Assets.Source.Events
         public override void Toggle()
         {
             // Pick New Random Word
+            m_Word = WordEventManager.Instance.GetRandomWord();
+
             m_Door1.Toggle();
             m_Door2.Toggle();
+            m_Door1.SetWord(m_Word);
+            m_Door2.SetWord(m_Word);
         }
 
         public override void Activate()

@@ -4,6 +4,7 @@ using Assets.Source.Events;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 namespace Assets.Source
 {
@@ -31,6 +32,17 @@ namespace Assets.Source
         private GameState m_CurrentState;
         private List<MonsterComponent> m_Monsters;
         private PlayerComponent m_Player;
+
+        private string[] m_RandomWords = new string[]
+        {
+            "POOP",
+            "FOOD",
+            "QUIZ",
+            "WIZ",
+            "ELEPHANT",
+            "RATS",
+            "TALL",
+        };
 
 
         public static WordEventManager Instance;
@@ -131,7 +143,12 @@ namespace Assets.Source
 
         public bool HasInputedWord(string m_Word)
         {
-            return m_CurrentInput.Contains(m_Word);
+            return m_CurrentInput.ToUpper().Contains(m_Word.ToUpper());
+        }
+
+        public string GetRandomWord()
+        {
+            return m_RandomWords[Random.Range(0, m_RandomWords.Length - 1)];
         }
 
         public void BufferReset()
